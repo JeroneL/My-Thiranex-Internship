@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jerone - Full Stack Developer portfolio with projects and contact info." />
+  <meta name="keywords" content="Jerone, developer, portfolio, HTML5, CSS, JavaScript" />
+  <meta name="author" content="Jerone" />
+  <meta property="og:title" content="Jerone | Developer Portfolio" />
+  <meta property="og:description" content="Personal portfolio of Jerone, a web developer." />
+  <meta property="og:type" content="website" />
+  <title>Jerone | Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 10px;
+      background: #7c3aed;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 999;
+    }
+    .skip-link:focus { top: 10px; }
+
+    /* Focus visible for keyboard users */
+    :focus-visible {
+      outline: 3px solid #7c3aed;
+      outline-offset: 3px;
+    }
+
+    /* ---- HEADER ---- */
+    header {
+      background: #7c3aed;
+      color: #fff;
+      padding: 16px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+
+    nav ul a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav ul a:hover,
+    nav ul a[aria-current="page"] {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ---- PAGES (show/hide) ---- */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ---- MAIN WRAPPER ---- */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* ---- HOME ---- */
+    .hero {
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span { color: #7c3aed; }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 2px solid #7c3aed;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-primary { background: #7c3aed; color: #fff; }
+    .btn-primary:hover { background: #5b21b6; }
+    .btn-outline { background: #fff; color: #7c3aed; margin-left: 12px; }
+    .btn-outline:hover { background: #7c3aed; color: #fff; }
+
+    /* Skills section */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      list-style: none;
+    }
+
+    .skill-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .skill-card span { font-size: 2rem; display: block; margin-bottom: 10px; }
+    .skill-card h3 { font-size: 1rem; margin-bottom: 6px; }
+    .skill-card p { font-size: 0.85rem; color: #666; }
+
+    /* ---- ABOUT ---- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .about-grid p { color: #444; line-height: 1.8; margin-bottom: 14px; font-size: 0.95rem; }
+
+    .fact-box {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .fact-box h3 { font-size: 1rem; color: #7c3aed; margin-bottom: 16px; font-weight: 700; }
+
+    .fact-box dl { display: grid; gap: 12px; }
+    .fact-box dt { font-size: 0.78rem; text-transform: uppercase; color: #888; letter-spacing: 0.06em; }
+    .fact-box dd { font-size: 0.9rem; color: #222; }
+
+    /* Timeline */
+    .timeline { list-style: none; border-left: 3px solid #7c3aed; padding-left: 24px; margin-top: 40px; display: grid; gap: 28px; }
+    .timeline li { position: relative; }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -31px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #7c3aed;
+      border: 2px solid #f5f5f5;
+    }
+    .timeline time { font-size: 0.8rem; color: #7c3aed; font-weight: 700; display: block; margin-bottom: 4px; }
+    .timeline h3 { font-size: 1rem; margin-bottom: 4px; }
+    .timeline p { font-size: 0.875rem; color: #666; }
+
+    /* ---- PROJECTS ---- */
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 100px;
+      border: 1.5px solid #ccc;
+      background: #fff;
+      color: #555;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: #7c3aed;
+      color: #fff;
+      border-color: #7c3aed;
+    }
+
+    .projects-grid {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover { border-color: #7c3aed; transform: translateY(-3px); }
+
+    .project-card h2 { font-size: 1.05rem; margin-bottom: 8px; }
+    .project-card p { font-size: 0.875rem; color: #666; flex: 1; margin-bottom: 16px; line-height: 1.6; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+
+    .tag {
+      font-size: 0.72rem;
+      background: #e8f0ff;
+      color: #7c3aed;
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-weight: 600;
+    }
+
+    .card-footer { display: flex; gap: 10px; }
+
+    .btn-sm {
+      padding: 7px 16px;
+      font-size: 0.82rem;
+      border-radius: 5px;
+      text-decoration: none;
+      border: 1.5px solid #7c3aed;
+      color: #7c3aed;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-sm:hover { background: #7c3aed; color: #fff; }
+    .btn-sm.ghost { border-color: #ccc; color: #555; }
+    .btn-sm.ghost:hover { background: #eee; color: #222; border-color: #bbb; }
+
+    /* ---- CONTACT ---- */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info h2 { font-size: 1.3rem; margin-bottom: 20px; }
+
+    address dl { display: grid; gap: 18px; }
+    address dt { font-size: 0.78rem; text-transform: uppercase; color: #888; letter-spacing: 0.06em; margin-bottom: 2px; }
+    address dd a { color: #7c3aed; text-decoration: none; font-size: 0.9rem; }
+    address dd a:hover { text-decoration: underline; }
+    address dd { font-size: 0.9rem; color: #444; }
+
+    .form-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+
+    label { font-size: 0.875rem; font-weight: 600; }
+    label abbr { color: #e00; text-decoration: none; margin-left: 2px; }
+
+    input, textarea {
+      padding: 10px 14px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3px rgba(0,87,255,0.12);
+    }
+
+    input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: #e00; }
+
+    .field-hint { font-size: 0.78rem; color: #888; }
+    .field-error { font-size: 0.8rem; color: #e00; min-height: 1em; }
+
+    .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: #555; cursor: pointer; }
+    input[type="checkbox"] { width: 16px; height: 16px; accent-color: #7c3aed; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: #5b21b6; }
+
+    #form-status {
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+    #form-status.success { background: #e8f8f0; color: #0a6640; border: 1px solid #a3d9bb; display: block; }
+    #form-status.error { background: #fff0f0; color: #c00; border: 1px solid #f5b8b8; display: block; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 0.85rem;
+    }
+
+    footer nav { margin-top: 10px; }
+    footer nav ul { list-style: none; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    footer nav a { color: #aaa; text-decoration: none; font-size: 0.85rem; }
+    footer nav a:hover { color: #fff; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 700px) {
+      .about-grid, .contact-layout { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header role="banner">
+    <nav role="navigation" aria-label="Primary navigation">
+      <a href="#" class="logo" onclick="showPage('home')" aria-label="Jerone Home">Jerone</a>
+      <ul role="list">
+        <li><a href="#" id="nav-home" aria-current="page" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" id="nav-about" onclick="showPage('about')">About</a></li>
+        <li><a href="#" id="nav-projects" onclick="showPage('projects')">Projects</a></li>
+        <li><a href="#" id="nav-contact" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- ===== HOME PAGE ===== -->
+    <section id="page-home" class="page active" aria-labelledby="hero-heading">
+      <div class="hero">
+        <h1 id="hero-heading">Hi, I'm <span>Jerone</span> 👋</h1>
+        <p>Full Stack Developer passionate about building fast, accessible, and beautifully structured web experiences.</p>
+        <a href="#" class="btn btn-primary" onclick="showPage('projects')">View Projects</a>
+        <a href="#" class="btn btn-outline" onclick="showPage('contact')">Contact Me</a>
+      </div>
+
+      <div class="container">
+        <h2 class="section-title" id="skills-heading">Core Skills</h2>
+        <ul class="skills-grid" role="list" aria-labelledby="skills-heading">
+          <li class="skill-card">
+            <span aria-hidden="true">🌐</span>
+            <h3>HTML5 &amp; Semantics</h3>
+            <p>Accessible, WCAG-compliant markup using proper semantic tags.</p>
+          </li>
+          <li class="skill-card">
+            <span aria-hidden="true">🎨</span>
+            <h3>CSS3 &amp; Layouts</h3>
+            <p>Responsive designs using Flexbox, Grid, and custom properties.</p>
+          </li>
+          <li class="skill-card">
+            <span aria-hidden="true">⚡</span>
+            <h3>JavaScript</h3>
+            <p>Dynamic and interactive UIs with modern ES6+ JavaScript.</p>
+          </li>
+          <li class="skill-card">
+            <span aria-hidden="true">♿</span>
+            <h3>Accessibility</h3>
+            <p>ARIA roles, keyboard navigation, and screen reader support.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT PAGE ===== -->
+    <section id="page-about" class="page" aria-labelledby="about-heading">
+      <div class="container">
+        <h1 id="about-heading">About Me</h1>
+        <div class="about-grid">
+          <div>
+            <p>I'm Jerone, a full stack developer based in Tamil Nadu, India. I specialise in building web applications that are visually compelling, semantically meaningful, and deeply accessible.</p>
+            <p>My approach starts from the foundation — correct HTML5 structure, ARIA implementation, WCAG-compliant design — then layers on visual polish and interactivity.</p>
+            <p>I believe great websites work for everyone, regardless of how they browse.</p>
+
+            <h2 id="timeline-heading" style="margin-top:36px; margin-bottom:20px; font-size:1.2rem;">Experience</h2>
+            <ol class="timeline" role="list" aria-labelledby="timeline-heading">
+              <li>
+                <time datetime="2026">2026</time>
+                <h3>Senior Frontend Developer</h3>
+                <p>Leading accessible UI architecture for 500k+ users.</p>
+              </li>
+              <li>
+                <time datetime="2024">2024</time>
+                <h3>Frontend Developer</h3>
+                <p>Built WCAG AA-compliant sites for clients across 12 industries.</p>
+              </li>
+              <li>
+                <time datetime="2022">2022</time>
+                <h3>Junior Developer</h3>
+                <p>Developed core features for two SaaS products using React and Node.js.</p>
+              </li>
+            </ol>
+          </div>
+
+          <aside aria-label="Quick facts about Jerone" class="fact-box">
+            <h3>Quick Facts</h3>
+            <dl>
+              <div><dt>Location</dt><dd>Tamil Nadu, India</dd></div>
+              <div><dt>Speciality</dt><dd>Full Stack / Accessibility</dd></div>
+              <div><dt>Languages</dt><dd>HTML, CSS, JS, Python</dd></div>
+              <div><dt>Availability</dt><dd>Open to freelance</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS PAGE ===== -->
+    <section id="page-projects" class="page" aria-labelledby="projects-heading">
+      <div class="container">
+        <h1 id="projects-heading">My Projects</h1>
+
+        <div class="filter-bar" role="group" aria-label="Filter projects by category">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="frontend" aria-pressed="false">Frontend</button>
+          <button class="filter-btn" data-filter="fullstack" aria-pressed="false">Full Stack</button>
+          <button class="filter-btn" data-filter="accessibility" aria-pressed="false">Accessibility</button>
+        </div>
+
+        <ul class="projects-grid" role="list" id="projects-list">
+          <li class="project-card" data-category="accessibility fullstack">
+            <h2>EcoTrack Dashboard</h2>
+            <div class="tags" role="list" aria-label="Technologies">
+              <span class="tag" role="listitem">HTML5</span>
+              <span class="tag" role="listitem">CSS3</span>
+              <span class="tag" role="listitem">JS</span>
+              <span class="tag" role="listitem">ARIA</span>
+            </div>
+            <p>A real-time carbon footprint tracker. Fully keyboard-navigable with ARIA live region updates and 100 Lighthouse accessibility score.</p>
+            <div class="card-footer">
+              <a href="#" class="btn-sm" aria-label="Live demo of EcoTrack Dashboard">Live Demo</a>
+              <a href="#" class="btn-sm ghost" aria-label="GitHub source of EcoTrack Dashboard">GitHub</a>
+            </div>
+          </li>
+
+          <li class="project-card" data-category="frontend">
+            <h2>Portfolio Template</h2>
+            <div class="tags" role="list" aria-label="Technologies">
+              <span class="tag" role="listitem">HTML5</span>
+              <span class="tag" role="listitem">CSS Grid</span>
+            </div>
+            <p>An open-source semantic portfolio template scoring 100 on Lighthouse SEO, Accessibility, and Performance.</p>
+            <div class="card-footer">
+              <a href="#" class="btn-sm" aria-label="Live demo of Portfolio Template">Live Demo</a>
+              <a href="#" class="btn-sm ghost" aria-label="GitHub source of Portfolio Template">GitHub</a>
+            </div>
+          </li>
+
+          <li class="project-card" data-category="fullstack">
+            <h2>TaskFlow App</h2>
+            <div class="tags" role="list" aria-label="Technologies">
+              <span class="tag" role="listitem">React</span>
+              <span class="tag" role="listitem">Node.js</span>
+              <span class="tag" role="listitem">MongoDB</span>
+            </div>
+            <p>A full-stack task management app with drag-and-drop, real-time sync, and complete keyboard support.</p>
+            <div class="card-footer">
+              <a href="#" class="btn-sm" aria-label="Live demo of TaskFlow App">Live Demo</a>
+              <a href="#" class="btn-sm ghost" aria-label="GitHub source of TaskFlow App">GitHub</a>
+            </div>
+          </li>
+
+          <li class="project-card" data-category="accessibility frontend">
+            <h2>A11y Component Kit</h2>
+            <div class="tags" role="list" aria-label="Technologies">
+              <span class="tag" role="listitem">HTML5</span>
+              <span class="tag" role="listitem">WAI-ARIA</span>
+              <span class="tag" role="listitem">CSS</span>
+            </div>
+            <p>A library of 20+ accessible UI components — modals, tabs, accordions — built to WCAG 2.2 AA standard.</p>
+            <div class="card-footer">
+              <a href="#" class="btn-sm" aria-label="Docs for A11y Component Kit">Docs</a>
+              <a href="#" class="btn-sm ghost" aria-label="GitHub source of A11y Component Kit">GitHub</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT PAGE ===== -->
+    <section id="page-contact" class="page" aria-labelledby="contact-heading">
+      <div class="container">
+        <h1 id="contact-heading">Contact Me</h1>
+        <div class="contact-layout">
+
+          <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <address>
+              <dl>
+                <div>
+                  <dt>📧 Email</dt>
+                  <dd><a href="mailto:abishek@example.com">abishek@example.com</a></dd>
+                </div>
+                <div>
+                  <dt>💼 LinkedIn</dt>
+                  <dd><a href="https://linkedin.com/in/abishek" target="_blank" rel="noopener noreferrer" aria-label="Jerone on LinkedIn (opens new tab)">linkedin.com/in/abishek</a></dd>
+                </div>
+                <div>
+                  <dt>🐙 GitHub</dt>
+                  <dd><a href="https://github.com/abishek" target="_blank" rel="noopener noreferrer" aria-label="Jerone on GitHub (opens new tab)">github.com/abishek</a></dd>
+                </div>
+                <div>
+                  <dt>📍 Location</dt>
+                  <dd>Tamil Nadu, India</dd>
+                </div>
+              </dl>
+            </address>
+          </div>
+
+          <div>
+            <p class="form-title" id="form-title">Send a Message</p>
+
+            <div id="form-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+            <form id="contact-form" aria-labelledby="form-title" novalidate>
+
+              <div class="form-group">
+                <label for="name">Full Name <abbr title="required" aria-label="required">*</abbr></label>
+                <input type="text" id="name" name="name" autocomplete="name" required aria-required="true" aria-describedby="name-error" placeholder="Your full name" />
+                <span id="name-error" class="field-error" role="alert" aria-live="assertive"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email <abbr title="required" aria-label="required">*</abbr></label>
+                <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" aria-describedby="email-error email-hint" placeholder="you@example.com" />
+                <span id="email-hint" class="field-hint">I'll never share your email.</span>
+                <span id="email-error" class="field-error" role="alert" aria-live="assertive"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="What's this about?" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message <abbr title="required" aria-label="required">*</abbr></label>
+                <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error msg-hint" placeholder="Write your message here..."></textarea>
+                <span id="msg-hint" class="field-hint"><span id="char-count" aria-live="polite">0</span> / 1000 characters</span>
+                <span id="message-error" class="field-error" role="alert" aria-live="assertive"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="newsletter" name="newsletter" />
+                  <span>Subscribe to my dev newsletter</span>
+                </label>
+              </div>
+
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <p>&copy; 2026 Jerone. Built with semantic HTML5 &amp; CSS3.</p>
+    <nav aria-label="Footer navigation">
+      <ul role="list">
+        <li><a href="#" onclick="showPage('about')">About</a></li>
+        <li><a href="#" onclick="showPage('projects')">Projects</a></li>
+        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script>
+    // ---- PAGE NAVIGATION ----
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+
+      document.querySelectorAll('nav ul a').forEach(a => a.removeAttribute('aria-current'));
+      const navLink = document.getElementById('nav-' + id);
+      if (navLink) navLink.setAttribute('aria-current', 'page');
+
+      document.getElementById('main-content').focus();
+      window.scrollTo(0, 0);
+    }
+
+    // ---- PROJECT FILTER ----
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('#projects-list .project-card').forEach(card => {
+          const match = filter === 'all' || card.dataset.category.includes(filter);
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    });
+
+    // ---- CONTACT FORM VALIDATION ----
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    document.getElementById('message').addEventListener('input', function () {
+      const len = Math.min(this.value.length, 1000);
+      this.value = this.value.slice(0, 1000);
+      document.getElementById('char-count').textContent = len;
+    });
+
+    function setError(id, msg) {
+      const el = document.getElementById(id + '-error');
+      const input = document.getElementById(id);
+      if (el) el.textContent = msg;
+      if (input) input.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearError(id) {
+      const el = document.getElementById(id + '-error');
+      const input = document.getElementById(id);
+      if (el) el.textContent = '';
+      if (input) input.removeAttribute('aria-invalid');
+    }
+
+    ['name', 'email', 'message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('blur', () => validateField(id));
+    });
+
+    function validateField(id) {
+      clearError(id);
+      const el = document.getElementById(id);
+      const val = el.value.trim();
+      if (!val) { setError(id, 'This field is required.'); return false; }
+      if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        setError(id, 'Enter a valid email address.'); return false;
+      }
+      return true;
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const valid = ['name', 'email', 'message'].every(validateField);
+      if (!valid) {
+        status.className = 'error';
+        status.textContent = 'Please fix the errors above.';
+        form.querySelector('[aria-invalid="true"]')?.focus();
+        return;
+      }
+      status.className = 'success';
+      status.textContent = '✓ Message sent! I\'ll get back to you within 48 hours.';
+      form.reset();
+      document.getElementById('char-count').textContent = '0';
+      status.focus();
+    });
+  </script>
+</body>
+</html>
